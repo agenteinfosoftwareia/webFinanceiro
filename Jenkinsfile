@@ -66,7 +66,7 @@ spec:
                         kubectl create configmap ${APP}-dist \\
                             --from-file=dist/webFinanceiro/browser/ \\
                             -n ${NS} \\
-                            --dry-run=client -o yaml | kubectl apply -f -
+                            --dry-run=client -o yaml | kubectl apply --server-side=true --force-conflicts -f -
 
                         kubectl apply -f k8s/deployment.yaml
 
