@@ -1,41 +1,42 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { Observable, of } from 'rxjs';
 import { LoginRequest, LoginResponse, RegisterRequest } from '../models/auth.model';
 
-const TOKEN_KEY = 'fn_jwt';
-const USER_KEY  = 'fn_user';
+const USER_KEY = 'fn_user';
+
+const MOCK_USER: LoginResponse = {
+  token: 'mock-token-123',
+  name: 'Flávio Nogueira',
+  email: 'flavio@hyti.com.br',
+  isAdmin: true
+};
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private api = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
-
-  login(req: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.api}/api/auth/login`, req).pipe(
-      tap(res => this.saveSession(res))
-    );
+  login(_req: LoginRequest): Observable<LoginResponse> {
+    localStorage.setItem(USER_KEY, JSON.stringify(MOCK_USER));
+    localStorage.setItem('fn_jwt', MOCK_USER.token);
+    return of(MOCK_USER);
   }
 
-  register(req: RegisterRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.api}/api/auth/register`, req);
+  register(_req: RegisterRequest): Observable<LoginResponse> {
+    return of({ ...MOCK_USER, token: '' });
   }
 
-  googleLogin(token: string): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.api}/api/auth/google`, { token }).pipe(
-      tap(res => this.saveSession(res))
-    );
+  googleLogin(_token: string): Observable<LoginResponse> {
+    localStorage.setItem(USER_KEY, JSON.stringify(MOCK_USER));
+    localStorage.setItem('fn_jwt', MOCK_USER.token);
+    return of(MOCK_USER);
   }
 
   logout(): void {
-    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem('fn_jwt');
     localStorage.removeItem(USER_KEY);
   }
 
   getToken(): string | null {
-    return localStorage.getItem(TOKEN_KEY);
+    return localStorage.getItem('fn_jwt');
   }
 
   isAuthenticated(): boolean {
@@ -49,10 +50,5 @@ export class AuthService {
 
   isAdmin(): boolean {
     return this.getUser()?.isAdmin ?? false;
-  }
-
-  private saveSession(res: LoginResponse): void {
-    if (res.token) localStorage.setItem(TOKEN_KEY, res.token);
-    localStorage.setItem(USER_KEY, JSON.stringify(res));
   }
 }
