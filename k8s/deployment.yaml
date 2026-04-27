@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webfinanceiro
+  namespace: webfinanceiro
+  labels:
+    app: webfinanceiro
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webfinanceiro
+  template:
+    metadata:
+      labels:
+        app: webfinanceiro
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: dist
+          mountPath: /usr/share/nginx/html
+          readOnly: true
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      volumes:
+      - name: dist
+        configMap:
+          name: webfinanceiro-dist
