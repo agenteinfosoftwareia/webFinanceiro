@@ -1,0 +1,74 @@
+<div class="shell" [class.collapsed]="collapsed()">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <div class="brand" *ngIf="!collapsed()">
+        <span class="brand-icon">💰</span>
+        <span class="brand-name">FinancasWeb</span>
+      </div>
+      <button class="toggle-btn" (click)="toggle()" [title]="collapsed() ? 'Expandir menu' : 'Recolher menu'">
+        {{ collapsed() ? '☰' : '✕' }}
+      </button>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-section" *ngIf="!collapsed()"><span class="nav-label">Principal</span></div>
+      <a class="nav-link" routerLink="/home"        routerLinkActive="active" [title]="collapsed() ? 'Home' : ''">
+        <span class="nav-icon">🏠</span><span class="nav-text" *ngIf="!collapsed()">Home</span>
+      </a>
+      <a class="nav-link" routerLink="/balanco"     routerLinkActive="active" [title]="collapsed() ? 'Balanço 2026' : ''">
+        <span class="nav-icon">📊</span><span class="nav-text" *ngIf="!collapsed()">Balanço 2026</span>
+      </a>
+
+      <div class="nav-section" *ngIf="!collapsed()"><span class="nav-label">Lançamentos</span></div>
+      <a class="nav-link" routerLink="/lancamentos" routerLinkActive="active" [title]="collapsed() ? 'Todos' : ''">
+        <span class="nav-icon">📋</span><span class="nav-text" *ngIf="!collapsed()">Todos</span>
+      </a>
+      <a class="nav-link" routerLink="/entradas"    routerLinkActive="active" [title]="collapsed() ? 'Entradas' : ''">
+        <span class="nav-icon">💰</span><span class="nav-text" *ngIf="!collapsed()">Entradas</span>
+      </a>
+      <a class="nav-link" routerLink="/despesas"    routerLinkActive="active" [title]="collapsed() ? 'Despesas' : ''">
+        <span class="nav-icon">💸</span><span class="nav-text" *ngIf="!collapsed()">Despesas</span>
+      </a>
+      <a class="nav-link" routerLink="/salario"     routerLinkActive="active" [title]="collapsed() ? 'Salário' : ''">
+        <span class="nav-icon">💼</span><span class="nav-text" *ngIf="!collapsed()">Salário</span>
+      </a>
+
+      <div class="nav-section" *ngIf="!collapsed() && user?.isAdmin"><span class="nav-label">Admin</span></div>
+      <a class="nav-link" routerLink="/admin"       routerLinkActive="active" *ngIf="user?.isAdmin" [title]="collapsed() ? 'Usuários' : ''">
+        <span class="nav-icon">👥</span><span class="nav-text" *ngIf="!collapsed()">Usuários</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-info" *ngIf="!collapsed()">
+        <div class="avatar">{{ initials }}</div>
+        <div class="user-details">
+          <div class="user-name">{{ user?.name }}</div>
+          <div class="user-email">{{ user?.email }}</div>
+        </div>
+      </div>
+      <div class="avatar small" *ngIf="collapsed()">{{ initials }}</div>
+      <button class="logout-btn" (click)="logout()" [title]="collapsed() ? 'Sair' : ''">
+        <span>🚪</span><span *ngIf="!collapsed()"> Sair</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-wrap">
+    <header class="topbar">
+      <button class="topbar-toggle" (click)="toggle()">☰</button>
+      <div class="topbar-title">
+        <div class="avatar small">{{ initials }}</div>
+        <span>{{ user?.name }}</span>
+        <span class="badge-admin" *ngIf="user?.isAdmin">Admin</span>
+      </div>
+    </header>
+    <main class="content">
+      <router-outlet />
+    </main>
+  </div>
+
+</div>

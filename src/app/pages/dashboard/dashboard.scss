@@ -1,0 +1,23 @@
+.page-title {
+  font-size: 18px; font-weight: 700; margin-bottom: 20px;
+}
+
+.empty-state {
+  text-align: center; padding: 60px 20px; color: #64748b;
+}
+.empty-ico { font-size: 48px; margin-bottom: 12px; }
+
+.quick-links {
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+.quick-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  background: #1e293b; border: 1px solid #334155; color: #e2e8f0;
+  text-decoration: none; transition: all .15s;
+  &:hover { filter: brightness(1.15); text-decoration: none; }
+  &.btn-r { background: #1c0d0d; border-color: #7f1d1d; color: #fca5a5; }
+  &.btn-y { background: #1c1204; border-color: #713f12; color: #fde68a; }
+  &.btn-p { background: #0e0a1e; border-color: #4c1d95; color: #c4b5fd; }
+  &.btn-b { background: #0c1a2e; border-color: #1e3a5f; color: #93c5fd; }
+}

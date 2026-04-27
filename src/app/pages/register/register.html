@@ -1,0 +1,48 @@
+<div class="login-wrap">
+  <div class="login-right" style="width:100%;max-width:420px;margin:auto">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="avatar">💰</div>
+        <div>
+          <h2>Criar Conta</h2>
+          <p class="muted">Aguarde aprovação do administrador</p>
+        </div>
+      </div>
+
+      <div class="alert ag" *ngIf="sucesso">
+        <span class="aico">✅</span>
+        <div class="abody">Conta criada! Aguarde a aprovação do administrador para acessar.
+          <br><a routerLink="/login">Voltar ao login</a>
+        </div>
+      </div>
+
+      <div class="alert ar" *ngIf="erro">
+        <span class="aico">⚠️</span>
+        <div class="abody">{{ erro }}</div>
+      </div>
+
+      <form (ngSubmit)="submit()" *ngIf="!sucesso">
+        <div class="form-group">
+          <label class="form-label">Nome</label>
+          <input class="form-control" type="text" [(ngModel)]="name" name="name" placeholder="Seu nome completo" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">E-mail</label>
+          <input class="form-control" type="email" [(ngModel)]="email" name="email" placeholder="seu@email.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Senha</label>
+          <input class="form-control" type="password" [(ngModel)]="password" name="password" placeholder="••••••••" />
+        </div>
+        <button class="btn btn-primary btn-full" type="submit" [disabled]="loading">
+          {{ loading ? 'Cadastrando...' : '✅ Criar Conta' }}
+        </button>
+      </form>
+
+      <div class="divider" *ngIf="!sucesso"><span>ou</span></div>
+      <p class="register-link" *ngIf="!sucesso">
+        Já tem conta? <a routerLink="/login">Entrar</a>
+      </p>
+    </div>
+  </div>
+</div>

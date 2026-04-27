@@ -1,0 +1,234 @@
+<!-- HEADER -->
+<header class="bal-header">
+  <div class="avatar">FN</div>
+  <div class="bal-info">
+    <h1>Balanço Financeiro 2026 — Flávio Nogueira</h1>
+    <p>HYTI Informática · Desenvolvedor · Revisão completa com escola dos filhos · 20/04/2026</p>
+  </div>
+  <div class="badges">
+    <span class="badge bg">Renda: R$ 14.299/mês</span>
+    <span class="badge br">Déficit: -R$ 1.943/mês</span>
+    <span class="badge by">Escola filhos: R$ 2.633/mês</span>
+    <span class="badge br">Escola atrasada: R$ 4.205</span>
+  </div>
+</header>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab" [class.active]="tabAtiva==='resumo'"   (click)="setTab('resumo')">📊 Balanço Geral</div>
+  <div class="tab" [class.active]="tabAtiva==='mensal'"   (click)="setTab('mensal')">📅 Mês a Mês 2026</div>
+  <div class="tab" [class.active]="tabAtiva==='despesas'" (click)="setTab('despesas')">💸 Despesas Completas</div>
+  <div class="tab" [class.active]="tabAtiva==='escola'"   (click)="setTab('escola')">🎓 Escola dos Filhos</div>
+  <div class="tab" [class.active]="tabAtiva==='dividas'"  (click)="setTab('dividas')">🚨 Dívidas em Aberto</div>
+  <div class="tab" [class.active]="tabAtiva==='cenarios'" (click)="setTab('cenarios')">🎯 Cenários</div>
+</div>
+
+<!-- ============ ABA BALANÇO GERAL ============ -->
+<div class="tab-body" *ngIf="tabAtiva==='resumo'">
+
+  <div class="stitle">Panorama — Acumulado 2026 (Jan–Abr)</div>
+  <div class="grid g6">
+    <div class="card cg"><span class="cico">💼</span><div class="clabel">Salário Líquido</div><div class="cval green">R$ 31.208</div><div class="csub">Acumulado Jan–Abr</div></div>
+    <div class="card cg"><span class="cico">🏠</span><div class="clabel">Aluguel + Benefício</div><div class="cval green">R$ 6.150</div><div class="csub">Acumulado Jan–Abr</div></div>
+    <div class="card cr"><span class="cico">💸</span><div class="clabel">Total Despesas</div><div class="cval red">R$ 62.164</div><div class="csub">Acumulado Jan–Abr</div></div>
+    <div class="card cr"><span class="cico">📉</span><div class="clabel">Déficit Meses</div><div class="cval red">-R$ 24.806</div><div class="csub">Jan+Fev quitado ext.</div></div>
+    <div class="card cy"><span class="cico">🎓</span><div class="clabel">Escola (Bryan+Ashley)</div><div class="cval yellow">R$ 12.553</div><div class="csub">Acumulado Jan–Abr</div></div>
+    <div class="card cr"><span class="cico">⚖️</span><div class="clabel">Dep. Judicial</div><div class="cval red">R$ 13.307</div><div class="csub">Acumulado Jan–Abr</div></div>
+  </div>
+
+  <div class="stitle">Alertas — Situação Atual</div>
+  <div class="alert ar"><span class="aico">🚨</span><div class="abody"><strong>ESCOLA BRYAN — MARÇO E ABRIL EM ATRASO: R$ 2.934,14</strong> — Mensalidade R$1.211,45 + material R$255,62 × 2 meses. Risco de impedimento de provas no 3º colegial!</div></div>
+  <div class="alert ar"><span class="aico">🚨</span><div class="abody"><strong>ESCOLA ASHLEY — ABRIL EM ATRASO: R$ 1.271,26</strong> — Mensalidade R$1.015,64 + material R$255,62. Total escola em aberto (Bryan + Ashley): <strong>R$ 4.205,40</strong>.</div></div>
+  <div class="alert ar"><span class="aico">📉</span><div class="abody"><strong>DÉFICIT ACUMULADO Jan–Abr: -R$ 24.806</strong> — Renda total R$37.358 vs. despesas R$62.164. Mar e Abr: déficit de <strong>-R$ 4.786</strong> ainda em aberto. Escola (R$3.138/mês) representa 21,9% da renda.</div></div>
+  <div class="alert ag"><span class="aico">✅</span><div class="abody"><strong>A partir de maio: ENEL não paga mais (Elenice assume)</strong> — Economia de R$480/mês. Pós-graduação Impacta inicia (R$300/mês). Déficit mensal cai para aprox. -R$1.763/mês.</div></div>
+
+  <div class="stitle">Comprometimento da Renda</div>
+  <div class="card">
+    <div class="prog-row"><div class="prog-label"><span>⚖️ Depósito Judicial</span><span class="red">23,3%</span></div><div class="prog-bar"><div class="prog-fill" style="width:23.3%;background:linear-gradient(90deg,#dc2626,#f87171)"></div></div></div>
+    <div class="prog-row"><div class="prog-label"><span>🏠 Consórcios (3 total)</span><span class="yellow">23,9%</span></div><div class="prog-bar"><div class="prog-fill" style="width:23.9%;background:linear-gradient(90deg,#d97706,#fbbf24)"></div></div></div>
+    <div class="prog-row"><div class="prog-label"><span>🎓 Escola Bryan + Ashley</span><span class="purple">21,9%</span></div><div class="prog-bar"><div class="prog-fill" style="width:21.9%;background:linear-gradient(90deg,#7c3aed,#a78bfa)"></div></div></div>
+    <div class="prog-row"><div class="prog-label"><span>🏢 Moradia</span><span>16,5%</span></div><div class="prog-bar"><div class="prog-fill" style="width:16.5%;background:linear-gradient(90deg,#2563eb,#60a5fa)"></div></div></div>
+    <div class="prog-row"><div class="prog-label"><span>🍽️ Alimentação</span><span>7,3%</span></div><div class="prog-bar"><div class="prog-fill" style="width:7.3%;background:linear-gradient(90deg,#d97706,#fbbf24);opacity:.7"></div></div></div>
+    <div class="prog-row"><div class="prog-label"><span>🚗 Transporte</span><span>6,6%</span></div><div class="prog-bar"><div class="prog-fill" style="width:6.6%;background:linear-gradient(90deg,#ea580c,#fb923c)"></div></div></div>
+    <div class="prog-row"><div class="prog-label"><span>👨‍👩‍👧 Família</span><span>5,3%</span></div><div class="prog-bar"><div class="prog-fill" style="width:5.3%;background:linear-gradient(90deg,#2563eb,#60a5fa);opacity:.6"></div></div></div>
+  </div>
+
+  <div class="hbox red" style="margin-top:16px">
+    <div class="clabel" style="color:#fca5a5;margin-bottom:6px">📍 BALANÇO ATUAL — Meses 2026</div>
+    <div class="bal-row">
+      <div><div style="font-size:10px;color:#94a3b8">Renda Jan–Abr</div><div style="font-size:26px;font-weight:800;color:#4ade80">R$ 37.358</div></div>
+      <div style="font-size:24px;color:#64748b;align-self:center">–</div>
+      <div><div style="font-size:10px;color:#94a3b8">Despesas Jan–Abr</div><div style="font-size:26px;font-weight:800;color:#f87171">R$ 62.164</div></div>
+      <div style="font-size:24px;color:#64748b;align-self:center">=</div>
+      <div><div style="font-size:10px;color:#94a3b8">Déficit acumulado</div><div style="font-size:26px;font-weight:800;color:#f87171">-R$ 24.806</div></div>
+    </div>
+    <div style="font-size:11px;color:#fca5a5;margin-top:8px">Jan e Fev quitados com recursos externos. Mar–Abr: déficit de -R$4.786 em aberto. Escola Jan–Abr: <strong>R$12.553</strong> · Dep. Judicial Jan–Abr: <strong>R$13.307</strong></div>
+  </div>
+</div>
+
+<!-- ============ ABA MÊS A MÊS ============ -->
+<div class="tab-body" *ngIf="tabAtiva==='mensal'">
+  <div class="stitle">Balanço Mês a Mês — 2026</div>
+  <div class="alert ab"><span class="aico">ℹ️</span><div class="abody"><strong>Legenda:</strong> Valores baseados na renda fixa de R$14.299/mês. A partir de maio: sem ENEL (-R$480) + pós-graduação (+R$300). Acordo condomínio encerra dezembro. Advogado encerra setembro.</div></div>
+  <div class="card" style="overflow-x:auto;margin-top:10px">
+    <table class="mtable">
+      <thead><tr><th style="width:130px">Mês</th><th>Renda</th><th>Despesas</th><th>Saldo</th><th>ENEL</th><th>Acordo Cond.</th><th>Advogado</th><th>Pós-grad</th><th>Obs.</th></tr></thead>
+      <tbody>
+        <tr><td>Jan/2026</td><td class="green">R$ 14.299</td><td class="red">R$ 16.242</td><td class="saldo-neg">-R$ 1.943</td><td>R$ 480</td><td>R$ 633</td><td>R$ 500</td><td>—</td><td class="obs">Início do ano</td></tr>
+        <tr><td>Fev/2026</td><td class="green">R$ 14.299</td><td class="red">R$ 16.242</td><td class="saldo-neg">-R$ 1.943</td><td>R$ 480</td><td>R$ 633</td><td>R$ 500</td><td>—</td><td class="obs">—</td></tr>
+        <tr><td>Mar/2026</td><td class="green">R$ 14.299</td><td class="red">R$ 16.242</td><td class="saldo-neg">-R$ 1.943</td><td>R$ 480</td><td>R$ 633</td><td>R$ 500</td><td>—</td><td class="obs yellow">SEM PARAR não pago</td></tr>
+        <tr class="mes-atual"><td><strong>Abr/2026 ← HOJE</strong></td><td class="green">R$ 14.299</td><td class="red">R$ 16.242</td><td class="saldo-neg">-R$ 1.943</td><td>R$ 480</td><td>R$ 633</td><td>R$ 500</td><td>—</td><td class="obs red">Ashley não paga!</td></tr>
+        <tr><td>Mai/2026</td><td class="green">R$ 14.299</td><td class="yellow">R$ 16.062</td><td class="saldo-neg">-R$ 1.763</td><td class="green">R$ 0 ✓</td><td>R$ 633</td><td>R$ 500</td><td>R$ 300</td><td class="obs green">Elenice paga ENEL</td></tr>
+        <tr><td>Jun/2026</td><td class="green">R$ 14.299</td><td class="yellow">R$ 16.062</td><td class="saldo-neg">-R$ 1.763</td><td class="green">R$ 0</td><td>R$ 633</td><td>R$ 500</td><td>R$ 300</td><td class="obs">—</td></tr>
+        <tr><td>Jul/2026</td><td class="green">R$ 14.299</td><td class="yellow">R$ 16.062</td><td class="saldo-neg">-R$ 1.763</td><td class="green">R$ 0</td><td>R$ 633</td><td>R$ 500</td><td>R$ 300</td><td class="obs">—</td></tr>
+        <tr><td>Ago/2026</td><td class="green">R$ 14.299</td><td class="yellow">R$ 16.062</td><td class="saldo-neg">-R$ 1.763</td><td class="green">R$ 0</td><td>R$ 633</td><td>R$ 500</td><td>R$ 300</td><td class="obs">—</td></tr>
+        <tr><td>Set/2026</td><td class="green">R$ 14.299</td><td class="yellow">R$ 16.062</td><td class="saldo-neg">-R$ 1.763</td><td class="green">R$ 0</td><td>R$ 633</td><td>R$ 500</td><td>R$ 300</td><td class="obs yellow">Últ. parcela advogado</td></tr>
+        <tr><td>Out/2026</td><td class="green">R$ 14.299</td><td class="green">R$ 15.562</td><td class="saldo-neg">-R$ 1.263</td><td class="green">R$ 0</td><td>R$ 633</td><td class="green">R$ 0 ✓</td><td>R$ 300</td><td class="obs green">Advogado quitado! -R$500</td></tr>
+        <tr><td>Nov/2026</td><td class="green">R$ 14.299</td><td class="green">R$ 15.562</td><td class="saldo-neg">-R$ 1.263</td><td class="green">R$ 0</td><td>R$ 633</td><td class="green">R$ 0</td><td>R$ 300</td><td class="obs">—</td></tr>
+        <tr><td>Dez/2026</td><td class="green">R$ 14.299</td><td class="green">R$ 15.562</td><td class="saldo-neg">-R$ 1.263</td><td class="green">R$ 0</td><td>R$ 633</td><td class="green">R$ 0</td><td>R$ 300</td><td class="obs">Últ. acordo cond.</td></tr>
+        <tr class="total-row"><td><strong>TOTAL 2026</strong></td><td class="green"><strong>R$ 171.588</strong></td><td class="red"><strong>R$ 190.718</strong></td><td class="saldo-neg"><strong>-R$ 19.130</strong></td><td colspan="5" class="obs muted">Projeção anual</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============ ABA DESPESAS COMPLETAS ============ -->
+<div class="tab-body" *ngIf="tabAtiva==='despesas'">
+  <div class="stitle">Despesas Mensais — Versão Balanço 2026</div>
+  <div class="card">
+    <table class="t">
+      <thead><tr><th>Despesa</th><th>Venc.</th><th>R$/mês</th><th>% Renda</th><th>Tipo</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="tsub" colspan="6">⚖️ OBRIGAÇÕES JUDICIAIS</td></tr>
+        <tr><td>⚖️ <strong>Depósito Judicial TJSP</strong> — Proc. 40016137020258260176</td><td>Dia 20</td><td class="red"><strong>R$ 3.326,62</strong></td><td class="red"><strong>23,3%</strong></td><td><span class="tag tr">Judicial</span></td><td><span class="tag tgr">~10 anos</span></td></tr>
+        <tr><td>⚖️ Advogado — Rubens Ferreira Galvão (5 restantes)</td><td>Dia 15</td><td><strong>R$ 500,00</strong></td><td>3,5%</td><td><span class="tag tr">Processo</span></td><td><span class="tag tg">Encerra set/26</span></td></tr>
+        <tr><td class="tsub" colspan="6">🏠 CONSÓRCIOS (Investimentos)</td></tr>
+        <tr><td>🏠 Consórcio Porto Seguro — Imóvel R$100.000</td><td>Dia 15</td><td><strong>R$ 409,90</strong></td><td>2,9%</td><td><span class="tag tg">Investimento</span></td><td><span class="tag ty">Avaliar cancelar</span></td></tr>
+        <tr><td>🏢 Consórcio — Carta R$400.000 (próximo apartamento)</td><td>Mensal</td><td class="yellow"><strong>R$ 1.230,00</strong></td><td class="yellow">8,6%</td><td><span class="tag tg">Investimento</span></td><td><span class="tag tg">MANTER</span></td></tr>
+        <tr><td>📱 Consórcio contemplado — carta R$187.000</td><td>Mensal</td><td class="red"><strong>R$ 1.780,00</strong></td><td class="red">12,4%</td><td><span class="tag tr">Obrigatório</span></td><td><span class="tag tgr">Pagar sempre</span></td></tr>
+        <tr><td class="tsub" colspan="6">🏢 MORADIA</td></tr>
+        <tr><td>🏢 Condomínio — Parque Firenze Embu</td><td>Dia 10</td><td><strong>R$ 900,00</strong></td><td>6,3%</td><td><span class="tag tb">Moradia</span></td><td><span class="tag tg">Em dia</span></td></tr>
+        <tr><td>📋 Acordo Condomínio — (encerra dez/2026)</td><td>Mensal</td><td><strong>R$ 632,65</strong></td><td>4,4%</td><td><span class="tag ty">Acordo</span></td><td><span class="tag tg">Quitar c/ consig.</span></td></tr>
+        <tr><td>⚡ Energia ENEL — <em class="green">A partir de mai/26: Elenice paga (R$0)</em></td><td>~Dia 7</td><td><strong>R$ 480,00</strong></td><td>3,4%</td><td><span class="tag tb">Moradia</span></td><td><span class="tag tg">Mai: zerado</span></td></tr>
+        <tr><td>🔥 Gás — Comgás</td><td>Mensal</td><td><strong>R$ 190,00</strong></td><td>1,3%</td><td><span class="tag tb">Moradia</span></td><td><span class="tag tgr">Manter</span></td></tr>
+        <tr><td>🌐 Internet Fibra — Mega Ipê</td><td>Mensal</td><td><strong>R$ 160,00</strong></td><td>1,1%</td><td><span class="tag tb">Moradia</span></td><td><span class="tag tgr">Manter</span></td></tr>
+        <tr><td class="tsub" colspan="6">🎓 ESCOLA — BRYAN (3º COLEGIAL)</td></tr>
+        <tr><td>🏫 Bryan — Mensalidade 3º colegial</td><td>Mensal</td><td class="purple"><strong>R$ 1.211,45</strong></td><td class="purple"><strong>8,5%</strong></td><td><span class="tag tp">Escola</span></td><td><span class="tag tr">MAR+ABR EM ATRASO</span></td></tr>
+        <tr><td>📚 Bryan — Material didático (confirmado)</td><td>Mensal</td><td><strong>R$ 255,62</strong></td><td>1,8%</td><td><span class="tag tp">Escola</span></td><td><span class="tag tr">MAR+ABR EM ATRASO</span></td></tr>
+        <tr><td class="tsub" colspan="6">🎓 ESCOLA — ASHLEY (1º COLEGIAL)</td></tr>
+        <tr><td>🏫 Ashley — Mensalidade 1º colegial</td><td>Mensal</td><td class="purple"><strong>R$ 1.015,64</strong></td><td class="purple"><strong>7,1%</strong></td><td><span class="tag tp">Escola</span></td><td><span class="tag tr">ABRIL NÃO PAGO</span></td></tr>
+        <tr><td>📚 Ashley — Material didático</td><td>Mensal</td><td><strong>R$ 255,62</strong></td><td>1,8%</td><td><span class="tag tp">Escola</span></td><td><span class="tag tr">ABRIL NÃO PAGO</span></td></tr>
+        <tr><td class="tsub" colspan="6">👨‍👩‍👧 FAMÍLIA</td></tr>
+        <tr><td>🚌 Transporte Escolar — Bryan e Ashley</td><td>Mensal</td><td><strong>R$ 400,00</strong></td><td>2,8%</td><td><span class="tag tb">Família</span></td><td><span class="tag tgr">Manter</span></td></tr>
+        <tr><td>🥊 Kung Fu + Sanda — Bryan e Ashley</td><td>Mensal</td><td><strong>R$ 300,00</strong></td><td>2,1%</td><td><span class="tag tb">Família</span></td><td><span class="tag tgr">Manter</span></td></tr>
+        <tr><td>🍎 Lanche das crianças — R$50/semana</td><td>Semanal</td><td><strong>R$ 215,00</strong></td><td>1,5%</td><td><span class="tag tb">Família</span></td><td><span class="tag tgr">Manter</span></td></tr>
+        <tr><td>✂️ Corte + Gelatinha — Bryan</td><td>Mensal</td><td><strong>R$ 90,00</strong></td><td>0,6%</td><td><span class="tag tb">Família</span></td><td><span class="tag tgr">Manter</span></td></tr>
+        <tr><td>💵 Mesadas — Bryan R$100 + Ashley R$50</td><td>Dia 7</td><td><strong>R$ 150,00</strong></td><td>1,0%</td><td><span class="tag tb">Família</span></td><td><span class="tag tgr">Manter</span></td></tr>
+        <tr><td class="tsub" colspan="6">🎓 EDUCAÇÃO FLÁVIO</td></tr>
+        <tr><td>🎓 Pós-Grad. Arq. Soluções Digitais — Impacta (18× R$300 a partir mai/26)</td><td>Mensal</td><td><strong>R$ 300,00</strong></td><td>2,1%</td><td><span class="tag tp">Educação</span></td><td><span class="tag tgr">A partir mai/26</span></td></tr>
+        <tr><td class="tsub" colspan="6">🚗 TRANSPORTE</td></tr>
+        <tr><td>⛽ Combustível (média mensal)</td><td>Variável</td><td><strong>R$ 600,00</strong></td><td>4,2%</td><td><span class="tag to">Transporte</span></td><td><span class="tag tgr">Monitorar</span></td></tr>
+        <tr><td>🅿️ Estacionamento — R$17 × 3 dias/sem × 4,3</td><td>Diário</td><td><strong>R$ 219,00</strong></td><td>1,5%</td><td><span class="tag ty">Monitorar</span></td><td><span class="tag tg">Mensalista</span></td></tr>
+        <tr><td>🚇 Metrô — R$10 × 3 dias/sem × 4,3</td><td>Diário</td><td><strong>R$ 129,00</strong></td><td>0,9%</td><td><span class="tag to">Transporte</span></td><td><span class="tag tgr">Manter</span></td></tr>
+        <tr><td class="tsub" colspan="6">🍽️ ALIMENTAÇÃO</td></tr>
+        <tr><td>🍽️ Almoço no trabalho — R$40 × 3 dias/sem × 4,3</td><td>Diário</td><td><strong>R$ 520,00</strong></td><td>3,6%</td><td><span class="tag ty">Alto!</span></td><td><span class="tag tg">Marmita 2x</span></td></tr>
+        <tr><td>☕ Café da manhã — R$8 × 3 dias/sem × 4,3</td><td>Diário</td><td><strong>R$ 104,00</strong></td><td>0,7%</td><td><span class="tag tgr">Hábito</span></td><td><span class="tag ty">Reduzir</span></td></tr>
+        <tr><td>🥛 Leite (mensal)</td><td>Variável</td><td><strong>R$ 120,00</strong></td><td>0,4%</td><td><span class="tag tb">Aliment.</span></td><td><span class="tag tgr">Manter</span></td></tr>
+        <tr><td>🥩 Carnes (compra mensal)</td><td>Variável</td><td><strong>R$ 300,00</strong></td><td>2,1%</td><td><span class="tag tb">Aliment.</span></td><td><span class="tag tg">Atacadão</span></td></tr>
+        <tr><td class="tsub" colspan="6">📱 ASSINATURAS</td></tr>
+        <tr><td>🎬 Netflix</td><td>Mensal</td><td><strong>R$ 120,00</strong></td><td>0,4%</td><td><span class="tag tgr">Lazer</span></td><td><span class="tag tgr">Manter</span></td></tr>
+        <tr><td>📦 Amazon Prime Video</td><td>Mensal</td><td><strong>R$ 50,00</strong></td><td>0,3%</td><td><span class="tag tgr">Lazer</span></td><td><span class="tag tgr">Manter</span></td></tr>
+        <tr><td>▶️ YouTube Premium</td><td>Mensal</td><td><strong>R$ 2,99</strong></td><td>—</td><td><span class="tag tgr">Lazer</span></td><td><span class="tag tgr">Manter</span></td></tr>
+        <tr class="ttotal"><td colspan="2"><strong>TOTAL MENSAL</strong></td><td class="red"><strong>R$ 16.241,87</strong></td><td class="red"><strong>113,6%</strong></td><td colspan="2" class="muted">da renda de R$14.298,76</td></tr>
+        <tr class="ttotal" style="background:#300"><td colspan="2"><strong class="red">DÉFICIT MENSAL</strong></td><td class="red"><strong>-R$ 1.943,11</strong></td><td colspan="3" class="muted">A partir mai/26 sem ENEL: aprox. -R$1.763/mês</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============ ABA ESCOLA ============ -->
+<div class="tab-body" *ngIf="tabAtiva==='escola'">
+  <div class="stitle">Escola dos Filhos — Detalhe Completo</div>
+  <div class="grid g2">
+    <div class="card cb">
+      <div style="font-size:16px;font-weight:800;color:#93c5fd;margin-bottom:12px">📘 Bryan Nogueira — 3º Colegial</div>
+      <table class="t">
+        <tr><td class="muted" style="font-size:10px;width:140px">Mensalidade</td><td style="font-size:13px;font-weight:800;color:#a78bfa"><strong>R$ 1.211,45</strong></td></tr>
+        <tr><td class="muted" style="font-size:10px">Material didático</td><td class="green"><strong>R$ 255,62</strong> <span style="font-size:9px">(confirmado)</span></td></tr>
+        <tr><td class="muted" style="font-size:10px">Transporte escolar</td><td>R$ 200,00 <span style="font-size:9px">(metade do total)</span></td></tr>
+        <tr><td class="muted" style="font-size:10px">Lanche</td><td>~R$ 107,50</td></tr>
+        <tr style="border-top:1px solid #334155"><td style="font-weight:700;font-size:11px">CUSTO TOTAL BRYAN</td><td style="font-size:13px;font-weight:800;color:#93c5fd"><strong>R$ 1.774,57/mês</strong></td></tr>
+      </table>
+      <div class="alert ar" style="margin-top:10px"><span class="aico">🚨</span><div class="abody" style="font-size:10px"><strong>MARÇO E ABRIL EM ATRASO!</strong><br>Mar: R$1.467,07 — Abr: R$1.467,07<br><strong>Total em aberto: R$ 2.934,14</strong><br>Risco de impedimento de provas!</div></div>
+    </div>
+    <div class="card cp">
+      <div style="font-size:16px;font-weight:800;color:#c4b5fd;margin-bottom:12px">📗 Ashley Yasmin — 1º Colegial</div>
+      <table class="t">
+        <tr><td class="muted" style="font-size:10px;width:140px">Mensalidade</td><td style="font-size:13px;font-weight:800;color:#a78bfa"><strong>R$ 1.015,64</strong></td></tr>
+        <tr><td class="muted" style="font-size:10px">Material didático</td><td class="green"><strong>R$ 255,62</strong></td></tr>
+        <tr><td class="muted" style="font-size:10px">Transporte escolar</td><td>R$ 200,00</td></tr>
+        <tr><td class="muted" style="font-size:10px">Lanche</td><td>~R$ 107,50</td></tr>
+        <tr style="border-top:1px solid #334155"><td style="font-weight:700;font-size:11px">CUSTO TOTAL ASHLEY</td><td style="font-size:13px;font-weight:800;color:#c4b5fd"><strong>~R$ 1.578/mês</strong></td></tr>
+      </table>
+      <div class="alert ar" style="margin-top:10px"><span class="aico">🚨</span><div class="abody" style="font-size:10px"><strong>ABRIL NÃO PAGO!</strong> R$1.271,26 em aberto. Pagar o quanto antes!</div></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:12px;text-align:center;padding:24px">
+    <div class="clabel">Total Investimento Escola / Mês</div>
+    <div class="bal-row" style="justify-content:center;margin-top:16px">
+      <div><div style="font-size:10px;color:#94a3b8">Bryan (mensalidade)</div><div style="font-size:22px;font-weight:800;color:#93c5fd">R$ 1.211,45</div></div>
+      <div style="font-size:22px;color:#64748b;align-self:center">+</div>
+      <div><div style="font-size:10px;color:#94a3b8">Ashley (mensalidade)</div><div style="font-size:22px;font-weight:800;color:#c4b5fd">R$ 1.015,64</div></div>
+      <div style="font-size:22px;color:#64748b;align-self:center">+</div>
+      <div><div style="font-size:10px;color:#94a3b8">Materiais</div><div style="font-size:22px;font-weight:800;color:#fbbf24">~R$ 405,62</div></div>
+      <div style="font-size:22px;color:#64748b;align-self:center">+</div>
+      <div><div style="font-size:10px;color:#94a3b8">Transporte</div><div style="font-size:22px;font-weight:800;color:#60a5fa">R$ 400,00</div></div>
+      <div style="font-size:22px;color:#64748b;align-self:center">=</div>
+      <div><div style="font-size:10px;color:#fbbf24">TOTAL ESCOLA / MÊS</div><div style="font-size:30px;font-weight:800;color:#fbbf24">R$ 3.032,71</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ABA DÍVIDAS ============ -->
+<div class="tab-body" *ngIf="tabAtiva==='dividas'">
+  <div class="stitle">Dívidas e Pendências em Aberto</div>
+  <div class="alert ar"><span class="aico">🚨</span><div class="abody"><strong>Total geral em aberto: ~R$ 31.676</strong> (escola + IPVA + cartões + acordo cond. + advogado)</div></div>
+  <div class="card">
+    <table class="t">
+      <thead><tr><th>Dívida</th><th>Valor</th><th>Prioridade</th><th>Situação</th></tr></thead>
+      <tbody>
+        <tr><td>🏫 Bryan — escola mar+abr em atraso</td><td class="red"><strong>R$ 2.934,14</strong></td><td><span class="tag tr">URGENTE</span></td><td><span class="tag tr">Risco provas!</span></td></tr>
+        <tr><td>🏫 Ashley — escola abril em atraso</td><td class="red"><strong>R$ 1.271,26</strong></td><td><span class="tag tr">URGENTE</span></td><td><span class="tag tr">Não pago</span></td></tr>
+        <tr><td>🚗 IPVA 2026 — 3 parcelas (jan+fev+mar)</td><td class="red"><strong>R$ 4.800,00</strong></td><td><span class="tag tr">Alta</span></td><td><span class="tag tr">Não pago ✗</span></td></tr>
+        <tr><td>💳 Cartões de crédito</td><td class="yellow"><strong>R$ 8.220,00</strong></td><td><span class="tag ty">Média</span></td><td><span class="tag ty">Em aberto</span></td></tr>
+        <tr><td>📋 Acordo Condomínio (9 parcelas × R$632,65)</td><td class="yellow"><strong>R$ 5.693,85</strong></td><td><span class="tag ty">Média</span></td><td><span class="tag tg">Em andamento</span></td></tr>
+        <tr><td>⚖️ Advogado (5 parcelas × R$500)</td><td class="yellow"><strong>R$ 2.500,00</strong></td><td><span class="tag ty">Média</span></td><td><span class="tag tg">Encerra set/26</span></td></tr>
+        <tr><td>⛽ Sem Parar (2 meses)</td><td class="yellow"><strong>R$ 90,00</strong></td><td><span class="tag tgr">Baixa</span></td><td><span class="tag ty">Mar+Abr</span></td></tr>
+        <tr class="ttotal"><td><strong>TOTAL EM ABERTO</strong></td><td class="red"><strong>R$ 25.509,25</strong></td><td colspan="2" class="muted">Priorizar escola + IPVA + cartões</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============ ABA CENÁRIOS ============ -->
+<div class="tab-body" *ngIf="tabAtiva==='cenarios'">
+  <div class="stitle">Cenários de Equilíbrio Financeiro</div>
+  <div class="grid g3">
+    <div class="hbox red">
+      <div class="clabel" style="color:#fca5a5;margin-bottom:8px">📍 CENÁRIO ATUAL</div>
+      <div style="font-size:22px;font-weight:800;color:#f87171">-R$ 1.943/mês</div>
+      <div style="font-size:11px;color:#fca5a5;margin-top:8px">Jan–Set/2026 com ENEL e Advogado. Déficit acumulado crescente.</div>
+    </div>
+    <div class="hbox yellow">
+      <div class="clabel" style="color:#fde68a;margin-bottom:8px">📅 MAI/2026 — SEM ENEL</div>
+      <div style="font-size:22px;font-weight:800;color:#fbbf24">-R$ 1.763/mês</div>
+      <div style="font-size:11px;color:#fde68a;margin-top:8px">Elenice assume ENEL (-R$480). Pós-grad entra (+R$300). Melhora R$180/mês.</div>
+    </div>
+    <div class="hbox green">
+      <div class="clabel" style="color:#bbf7d0;margin-bottom:8px">🎯 OUT/2026 — SEM ADVOGADO</div>
+      <div style="font-size:22px;font-weight:800;color:#4ade80">-R$ 1.263/mês</div>
+      <div style="font-size:11px;color:#bbf7d0;margin-top:8px">Advogado quitado em set/26 (-R$500). Déficit cai mais R$500/mês.</div>
+    </div>
+  </div>
+  <div class="alert ab" style="margin-top:16px"><span class="aico">💡</span><div class="abody"><strong>Jan/2027 em diante:</strong> Acordo condomínio encerra (dez/26) e advogado encerra (set/26), liberando <strong>R$1.133/mês</strong>. O déficit cai para <strong>~-R$810/mês em jan/2027</strong>. Com a quitação das obrigações e cortes de gastos variáveis, o equilíbrio fica alcançável.</div></div>
+</div>

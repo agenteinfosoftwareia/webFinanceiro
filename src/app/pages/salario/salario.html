@@ -1,0 +1,77 @@
+<div class="page-title">💼 Salários</div>
+
+<div class="filter-bar">
+  <div class="form-group">
+    <label class="form-label">Ano</label>
+    <select class="form-control" [(ngModel)]="anoFiltro" style="width:90px">
+      <option *ngFor="let a of anos" [value]="a">{{ a }}</option>
+    </select>
+  </div>
+  <button class="btn btn-primary" style="margin-top:20px" (click)="carregar()">🔍</button>
+  <button class="btn btn-success" style="margin-top:20px;margin-left:auto" (click)="novoOuEditar()">+ Cadastrar Salário</button>
+</div>
+
+<div class="empty-state" *ngIf="loading"><div class="empty-ico">⏳</div><p>Carregando...</p></div>
+
+<ng-container *ngIf="!loading && salarios.length">
+  <div class="card" style="margin-bottom:12px;padding:10px 14px;display:flex;align-items:center;gap:16px">
+    <span class="green" style="font-size:13px;font-weight:700">💼 Total Ano: {{ fmt(salarios.reduce((s,r)=>s+r.valor,0)) }}</span>
+    <span class="muted" style="margin-left:auto;font-size:11px">{{ salarios.length }} mês(es) cadastrado(s)</span>
+  </div>
+  <div class="grid g3">
+    <div class="card cg" *ngFor="let s of salarios">
+      <div class="clabel">{{ nomeMes(s.mes) }}/{{ s.ano }}</div>
+      <div class="cval green">{{ fmt(s.valor) }}</div>
+      <div class="csub">{{ s.descricao }}</div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="btn btn-primary" style="flex:1;font-size:11px;padding:6px" (click)="novoOuEditar(s)">✏️ Editar</button>
+        <button class="btn btn-danger" style="flex:1;font-size:11px;padding:6px" (click)="confirmarExclusao(s)">🗑️</button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<div class="empty-state" *ngIf="!loading && !salarios.length">
+  <div class="empty-ico">💼</div><p>Nenhum salário cadastrado para {{ anoFiltro }}.</p>
+  <button class="btn btn-success" style="margin-top:16px" (click)="novoOuEditar()">+ Cadastrar Salário</button>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" (click)="showModal=false" *ngIf="showModal">
+  <div class="modal-box" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Cadastrar / Atualizar Salário</h3>
+      <button class="modal-close" (click)="showModal=false">✕</button>
+    </div>
+    <div class="alert ab" style="margin-bottom:12px">
+      <span class="aico">ℹ️</span>
+      <div class="abody">Se já existir salário para o mês/ano, ele será atualizado automaticamente.</div>
+    </div>
+    <div class="alert ar" *ngIf="erro" style="margin-bottom:12px"><span class="aico">⚠️</span><div class="abody">{{ erro }}</div></div>
+    <div class="grid g2">
+      <div class="form-group"><label class="form-label">Mês</label>
+        <select class="form-control" [(ngModel)]="form.mes">
+          <option *ngFor="let m of meses; let i=index" [value]="i+1">{{ m }}</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="form-label">Ano</label><input class="form-control" type="number" [(ngModel)]="form.ano" /></div>
+    </div>
+    <div class="form-group"><label class="form-label">Valor (R$)</label><input class="form-control" type="number" step="0.01" [(ngModel)]="form.valor" /></div>
+    <div class="form-group"><label class="form-label">Descrição</label><input class="form-control" [(ngModel)]="form.descricao" placeholder="Ex: Salário líquido HYTI" /></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" (click)="showModal=false">Cancelar</button>
+      <button class="btn btn-success" (click)="salvar()" [disabled]="salvando">{{ salvando ? 'Salvando...' : '💾 Salvar' }}</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showConfirm">
+  <div class="modal-box" style="max-width:360px">
+    <div class="modal-header"><h3>Confirmar Exclusão</h3></div>
+    <p style="color:#cbd5e1;font-size:13px">Excluir salário de <strong>{{ nomeMes(excluindo?.mes ?? 1) }}/{{ excluindo?.ano }}</strong> ({{ fmt(excluindo?.valor ?? 0) }})?</p>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" (click)="showConfirm=false">Cancelar</button>
+      <button class="btn btn-danger" (click)="excluir()">🗑️ Excluir</button>
+    </div>
+  </div>
+</div>

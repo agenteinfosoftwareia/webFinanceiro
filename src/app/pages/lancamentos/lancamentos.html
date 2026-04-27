@@ -1,0 +1,136 @@
+<div class="page-title">📋 Todos os Lançamentos</div>
+
+<div class="filter-bar">
+  <div class="form-group">
+    <label class="form-label">Mês</label>
+    <select class="form-control" [(ngModel)]="mes" style="width:100px">
+      <option [value]="0">Todos</option>
+      <option *ngFor="let m of meses; let i=index" [value]="i+1">{{ m }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Ano</label>
+    <select class="form-control" [(ngModel)]="ano" style="width:90px">
+      <option [value]="0">Todos</option>
+      <option *ngFor="let a of anos" [value]="a">{{ a }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Tipo</label>
+    <select class="form-control" [(ngModel)]="tipo" style="width:120px">
+      <option value="">Todos</option>
+      <option value="Entrada">Entradas</option>
+      <option value="Despesa">Despesas</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Busca</label>
+    <input class="form-control" [(ngModel)]="busca" placeholder="Categoria ou descrição..." style="width:180px" />
+  </div>
+  <button class="btn btn-primary" style="margin-top:20px" (click)="carregar()" [disabled]="loading">🔍</button>
+  <button class="btn btn-success" style="margin-top:20px;margin-left:auto" (click)="novo()">+ Novo</button>
+</div>
+
+<div class="empty-state" *ngIf="loading"><div class="empty-ico">⏳</div><p>Carregando...</p></div>
+
+<ng-container *ngIf="!loading && filtrados.length">
+  <!-- TOTAIS -->
+  <div class="grid g3" style="margin-bottom:12px">
+    <div class="card cb" style="padding:10px 14px">
+      <div class="clabel">Total Entradas</div>
+      <div class="cval blue" style="font-size:18px">{{ fmt(filtrados.filter(r=>r.tipo==='Entrada').reduce((s,r)=>s+r.valor,0)) }}</div>
+    </div>
+    <div class="card cr" style="padding:10px 14px">
+      <div class="clabel">Total Despesas</div>
+      <div class="cval red" style="font-size:18px">{{ fmt(filtrados.filter(r=>r.tipo==='Despesa').reduce((s,r)=>s+r.valor,0)) }}</div>
+    </div>
+    <div class="card" style="padding:10px 14px">
+      <div class="clabel">Saldo</div>
+      <div class="cval" [class.green]="(filtrados.filter(r=>r.tipo==='Entrada').reduce((s,r)=>s+r.valor,0) - filtrados.filter(r=>r.tipo==='Despesa').reduce((s,r)=>s+r.valor,0))>=0"
+           [class.red]="(filtrados.filter(r=>r.tipo==='Entrada').reduce((s,r)=>s+r.valor,0) - filtrados.filter(r=>r.tipo==='Despesa').reduce((s,r)=>s+r.valor,0))<0"
+           style="font-size:18px">
+        {{ fmt(filtrados.filter(r=>r.tipo==='Entrada').reduce((s,r)=>s+r.valor,0) - filtrados.filter(r=>r.tipo==='Despesa').reduce((s,r)=>s+r.valor,0)) }}
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="t">
+      <thead><tr><th>Data</th><th>Tipo</th><th>Categoria</th><th>Descrição</th><th style="text-align:right">Valor</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        <tr *ngFor="let r of filtrados">
+          <td>{{ r.dataLancamento | date:'dd/MM/yyyy' }}</td>
+          <td><span class="tag" [class.tg]="r.tipo==='Entrada'" [class.tr]="r.tipo==='Despesa'">{{ r.tipo }}</span></td>
+          <td>{{ r.categoria }}</td>
+          <td>{{ r.descricao }}</td>
+          <td style="text-align:right" [class.green]="r.tipo==='Entrada'" [class.red]="r.tipo==='Despesa'">{{ fmt(r.valor) }}</td>
+          <td><span class="tag" [class.tg]="r.pago" [class.ty]="!r.pago">{{ r.pago ? 'Quitado' : 'Pendente' }}</span></td>
+          <td style="white-space:nowrap">
+            <button class="btn btn-primary" style="padding:4px 10px;font-size:10px" (click)="editar(r)">✏️</button>
+            <button class="btn btn-danger"  style="padding:4px 10px;font-size:10px;margin-left:4px" (click)="confirmarExclusao(r)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>
+
+<div class="empty-state" *ngIf="!loading && !filtrados.length">
+  <div class="empty-ico">📋</div><p>Nenhum lançamento encontrado.</p>
+</div>
+
+<!-- MODAL EDITAR/CRIAR -->
+<div class="modal-overlay" (click)="showModal=false" *ngIf="showModal">
+  <div class="modal-box" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>{{ editando ? 'Editar' : 'Novo' }} Lançamento</h3>
+      <button class="modal-close" (click)="showModal=false">✕</button>
+    </div>
+    <div class="alert ar" *ngIf="erro" style="margin-bottom:12px"><span class="aico">⚠️</span><div class="abody">{{ erro }}</div></div>
+    <div class="form-group">
+      <label class="form-label">Tipo</label>
+      <select class="form-control" [(ngModel)]="form.tipo">
+        <option value="Entrada">Entrada</option>
+        <option value="Despesa">Despesa</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Data</label>
+      <input class="form-control" type="date" [(ngModel)]="form.dataLancamento" />
+    </div>
+    <div class="grid g2">
+      <div class="form-group"><label class="form-label">Mês</label>
+        <select class="form-control" [(ngModel)]="form.mes">
+          <option *ngFor="let m of meses; let i=index" [value]="i+1">{{ m }}</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="form-label">Ano</label>
+        <input class="form-control" type="number" [(ngModel)]="form.ano" /></div>
+    </div>
+    <div class="form-group"><label class="form-label">Categoria</label><input class="form-control" [(ngModel)]="form.categoria" /></div>
+    <div class="form-group"><label class="form-label">Descrição</label><input class="form-control" [(ngModel)]="form.descricao" /></div>
+    <div class="form-group"><label class="form-label">Valor (R$)</label><input class="form-control" type="number" step="0.01" [(ngModel)]="form.valor" /></div>
+    <div class="form-group">
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+        <input type="checkbox" [(ngModel)]="form.pago" style="width:16px;height:16px" />
+        <span class="form-label" style="margin:0">Quitado/Recebido</span>
+      </label>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" (click)="showModal=false">Cancelar</button>
+      <button class="btn btn-primary" (click)="salvar()" [disabled]="salvando">{{ salvando ? 'Salvando...' : '💾 Salvar' }}</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CONFIRMAR EXCLUSÃO -->
+<div class="modal-overlay" *ngIf="showConfirm">
+  <div class="modal-box" style="max-width:360px">
+    <div class="modal-header"><h3>Confirmar Exclusão</h3></div>
+    <p style="color:#cbd5e1;font-size:13px">Excluir "<strong>{{ excluindo?.descricao }}</strong>"?</p>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" (click)="showConfirm=false">Cancelar</button>
+      <button class="btn btn-danger" (click)="excluir()">🗑️ Excluir</button>
+    </div>
+  </div>
+</div>

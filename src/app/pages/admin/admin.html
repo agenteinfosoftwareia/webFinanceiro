@@ -1,0 +1,29 @@
+<div class="page-title">🛡️ Administração</div>
+
+<div class="section-title">Usuários Pendentes de Aprovação</div>
+
+<div class="empty-state" *ngIf="loading">
+  <div class="empty-ico">⏳</div><p>Carregando...</p>
+</div>
+
+<div class="empty-state" *ngIf="!loading && !pendentes.length">
+  <div class="empty-ico">✅</div>
+  <p>Nenhum usuário aguardando aprovação.</p>
+</div>
+
+<div class="pending-list" *ngIf="!loading && pendentes.length">
+  <div class="card pending-card" *ngFor="let u of pendentes">
+    <div class="avatar">{{ iniciais(u.name) }}</div>
+    <div class="user-info">
+      <div class="user-name">{{ u.name }}</div>
+      <div class="user-email">{{ u.email }}</div>
+      <div class="user-meta">
+        <span class="tag ty">Pendente</span>
+        <span class="muted" style="font-size:11px">Registro: {{ u.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+      </div>
+    </div>
+    <button class="btn btn-success" (click)="aprovar(u.id)" [disabled]="aprovando === u.id">
+      {{ aprovando === u.id ? 'Aprovando...' : '✅ Aprovar' }}
+    </button>
+  </div>
+</div>

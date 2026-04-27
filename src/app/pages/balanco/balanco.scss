@@ -1,0 +1,35 @@
+.bal-header {
+  background: linear-gradient(135deg, #1e3a5f, #0f172a);
+  padding: 20px 28px;
+  border-bottom: 1px solid #1e3a5f;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: -24px -28px 0;
+}
+.bal-info h1 { font-size: 18px; font-weight: 700; color: #f1f5f9; }
+.bal-info p  { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+.badges { display: flex; gap: 5px; margin-left: auto; flex-wrap: wrap; align-items: center; }
+
+.tabs { display: flex; gap: 2px; padding: 12px 0 0; flex-wrap: wrap; margin-bottom: 0; }
+.tab { padding: 8px 16px; border-radius: 8px 8px 0 0; font-size: 11px; font-weight: 700; cursor: pointer; color: #64748b; background: #1e293b; border: 1px solid #334155; border-bottom: none; transition: all .2s; user-select: none; }
+.tab.active { background: #1e3a5f; color: #93c5fd; border-color: #1d4ed8; }
+.tab:hover:not(.active) { background: #253347; color: #e2e8f0; }
+
+.tab-body { padding: 12px 0; }
+
+.bal-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.obs { font-size: 9px; color: #64748b; }
+
+@media (max-width: 768px) {
+  .bal-header { margin: -16px -16px 0; }
+}

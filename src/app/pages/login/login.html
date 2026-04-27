@@ -1,0 +1,68 @@
+<div class="login-wrap">
+  <div class="login-left">
+    <div class="brand-block">
+      <div class="brand-ico">💰</div>
+      <h1>FinancasWeb</h1>
+      <p>Gestão financeira pessoal · HYTI Informática</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card cg">
+        <div class="clabel">Entradas</div>
+        <div class="cval green">Controle</div>
+      </div>
+      <div class="stat-card cr">
+        <div class="clabel">Despesas</div>
+        <div class="cval red">Monitoradas</div>
+      </div>
+      <div class="stat-card cb">
+        <div class="clabel">Salário</div>
+        <div class="cval blue">Cadastrado</div>
+      </div>
+      <div class="stat-card cy">
+        <div class="clabel">Saldo</div>
+        <div class="cval yellow">Visível</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-right">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="avatar">💰</div>
+        <div>
+          <h2>Entrar</h2>
+          <p class="muted">Acesse sua conta financeira</p>
+        </div>
+      </div>
+
+      <div class="alert ar" *ngIf="erro">
+        <span class="aico">⚠️</span>
+        <div class="abody">{{ erro }}</div>
+      </div>
+
+      <form (ngSubmit)="submit()">
+        <div class="form-group">
+          <label class="form-label">E-mail</label>
+          <input class="form-control" type="email" [(ngModel)]="email" name="email"
+                 placeholder="seu@email.com" autocomplete="username" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Senha</label>
+          <input class="form-control" type="password" [(ngModel)]="password" name="password"
+                 placeholder="••••••••" autocomplete="current-password" />
+        </div>
+
+        <button class="btn btn-primary btn-full" type="submit" [disabled]="loading">
+          {{ loading ? 'Entrando...' : '🔐 Entrar' }}
+        </button>
+      </form>
+
+      <div class="divider"><span>ou</span></div>
+
+      <p class="register-link">
+        Ainda não tem conta?
+        <a routerLink="/register">Criar conta</a>
+      </p>
+    </div>
+  </div>
+</div>
