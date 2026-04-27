@@ -56,3 +56,4 @@ Documentação Swagger: `http://localhost:8080/swagger`
 - Expansível: 220px (completo) ↔ 60px (somente ícones)
 - Responsivo: oculto em mobile com botão de abertura
 - Links: Home, Balanço 2026, Lançamentos, Entradas, Despesas, Salário, Admin
+# Pipeline: commit → Jenkins → Deploy automático
